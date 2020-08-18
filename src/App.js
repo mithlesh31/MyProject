@@ -1,25 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Provider } from "react-redux";
+import { ThemeProvider } from "styled-components";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 import './App.css';
+import store from './store/store';
+import theme from './utils/theme';
+import Header from './component/Header';
+import Footer from './component/Footer';
+import loadable from './utils/loadable';
+
+const Main = loadable(() => import('./container/Main'));
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Header />
+          <Main />
+          <Footer />
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
   );
 }
 

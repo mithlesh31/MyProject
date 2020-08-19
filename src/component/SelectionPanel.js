@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from "react-redux";
 import styled from "styled-components";
 import Select from '../component/Select';
@@ -29,13 +28,14 @@ const SelectionPanel = props => {
             for(let key in planet) {
                 if(tmpBool)
                    break;
-                if(planet.hasOwnProperty(key) && key != index)
+                if(planet.hasOwnProperty(key) && Number(key) !== Number(index))
                    tmpBool = planet[key] && planet[key].name === v.name
             }
             return !tmpBool;
         })
         changePlanetOption(tmpOption);
         return () => {}
+        // eslint-disable-next-line
     }, [planetList, planet]);
 
     React.useEffect(() => {
@@ -50,6 +50,7 @@ const SelectionPanel = props => {
         })
         changeVehicalOption(tmpOption);
         return () => {}
+        // eslint-disable-next-line
     }, [vehicleList, vehicle])
 
     const handleChange = (event) => {
@@ -70,9 +71,11 @@ const SelectionPanel = props => {
     if(vehicle && vehicle[index]) {
         vehicleValue = vehicle[index];
     }
+
+    const vehicleCount = Object.keys(vehicle).length;
     return (
-        <SelectionPanelWrapper raised={Object.keys(vehicle).length == index}>
-            <Select label={`Destination ${index + 1}`} value={planetValue ? planetValue.name : ""} labelKey="name" valueKey="name" options={planetOption} onChange={handlePlanetChange}/>
+        <SelectionPanelWrapper raised={vehicleCount === index}>
+            <Select label={`Destination ${index + 1}`} value={planetValue ? planetValue.name : ""} labelKey="name" valueKey="name" options={planetOption} onChange={handlePlanetChange} disabled={vehicleCount < index} />
             {planetValue && <FormControl component="fieldset">
                 <RadioGroup aria-label="gender" name="vehicle" value={vehicleValue && vehicleValue.name} onChange={handleChange}>
                     {vehicalOption.map(v => {

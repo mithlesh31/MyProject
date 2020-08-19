@@ -10,11 +10,11 @@ const SelectStyle = styled(NativeSelect)`
 `;
 
 const Select = props => {
-    const { placeholder, onChange, options, valueKey, labelKey, label, value} = props;
+    const { placeholder, onChange, options, valueKey, labelKey, label, value, ...rest} = props;
     return (
         <div>
             {label && <DarkText14>{label}</DarkText14>}
-            <SelectStyle onChange={onChange} value={value}>
+            <SelectStyle {...rest} onChange={onChange} value={value}>
                 <option>{placeholder}</option>
                 {
                     options && options.length && options.map(option =>  <option value={option[valueKey]} key={option[valueKey]}>{option[labelKey]}</option>)

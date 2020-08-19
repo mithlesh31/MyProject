@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { Route, Switch } from "react-router-dom";
-import PropTypes from 'prop-types'
 import store from '../store/store';
 import loadable from '../utils/loadable';
 import { fetchVehiclesRequest } from '../store/actions/vehicles';

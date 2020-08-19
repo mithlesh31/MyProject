@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -23,10 +22,10 @@ const Success = props => {
 
     const getTotalTime = () => {
         let time = 0;
-        Object.keys(planet).map(k => {
+        for(let k in planet) {
             if(planet[k] && vehicle[k])
-              time = time + (planet[k].distance / vehicle[k].speed);
-        })
+                time = time + (planet[k].distance / vehicle[k].speed);
+        }
         return time;
     }
 
@@ -34,6 +33,7 @@ const Success = props => {
         return () => {
             resetAll();
         }
+        // eslint-disable-next-line
     }, []);
 
     return (

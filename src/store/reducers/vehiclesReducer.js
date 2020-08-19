@@ -1,6 +1,6 @@
 import produce from "immer";
 import { FETCH_VEHICLES_SUCCESS, SELECT_VEHICLE, CLEAN_VEHICLE } from "../actions/vehicles";
-import store from "../store";
+
 // Initial State
 const initialState = {
   vehicleList: [],

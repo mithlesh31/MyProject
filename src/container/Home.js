@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -45,12 +45,12 @@ const Home = props => {
     const [ snackOpen, setSnackOpen ] = React.useState(false);
     
     const getTotalTime = () => {
-        let time = 0;
-        Object.keys(planet).map(k => {
-            if(planet[k] && vehicle[k])
-              time = time + (planet[k].distance / vehicle[k].speed);
-        })
-        return time;
+      let time = 0;
+      for(let k in planet) {
+        if(planet[k] && vehicle[k])
+          time = time + (planet[k].distance / vehicle[k].speed);
+      }
+      return time;
     }
 
     const handleClick = () => {

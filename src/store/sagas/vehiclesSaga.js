@@ -1,5 +1,4 @@
 import {
-    delay,
     all,
     fork,
     takeLatest,
